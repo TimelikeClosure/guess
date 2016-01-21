@@ -11,15 +11,24 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-        <!--  Begin guessing game script  -->
+        <!--  Begin guessing game initialization script  -->
         <script>
+            //  Declare and initialize target number
+            var the_number = null;
 
+            //  Begin pick_number() function definition
+            function pick_number() {
+                var random_number = Math.floor(10*Math.random() + 1,1);
+                console.log("random_number : " + random_number);
+                return random_number;
+            }
+            //  Close pick_number() function definition
         </script>
-        <!--  Close guessing game script  -->
+        <!--  Close guessing game initialization script  -->
 
     </head>
 
-    <body>
+    <body onload="the_number = pick_number();">
         <input type="text" id="guess_input" />
         <div id="response_div"></div>
         <button type="button" id="submit_button">Submit</button>
