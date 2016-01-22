@@ -77,17 +77,30 @@
             }
             //  Close make_guess() function definition
 
+            //  Begin jQuery event handlers on document ready
+            $(document).ready(function(){
+                //  Call make_guess() on submit
+                $('#submit_button').click(function(){
+                    make_guess();
+                });
+            });
+            //  Close jQuery event handlers on document ready
+
         </script>
         <!--  Close guessing game script  -->
 
     </head>
 
     <body onload="the_number = pick_number(); fill_instructions();">
+        <h1>Guess!</h1>
         <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
         <fieldset>
-            <legend id="instructions">Guess a number</legend>
+            <legend id="instructions">The current range is undetermined</legend>
             <label>Guess a number : <input type="text" id="guess_input" /></label>
-            <button type="button" id="submit_button" onclick="make_guess();">Guess</button>
+            <button type="button" id="submit_button">Guess!</button>
+        </fieldset>
+        <fieldset>
+            <legend>Results:</legend>
             <div id="response_div"></div>
         </fieldset>
     </body>
