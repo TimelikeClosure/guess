@@ -22,7 +22,7 @@
             function pick_number() {
                 //  Generate a random integer from lower_limit to upper_limit
                 var random_number = Math.floor((upper_limit - lower_limit + 1)*Math.random() + lower_limit,1);
-                console.log("random_number : " + random_number);
+                //console.log("random_number : " + random_number);
                 return random_number;
             }
             //  Close pick_number() function definition
@@ -30,33 +30,33 @@
             //  Begin make_guess() function definition
             function make_guess() {
                 var the_guess = parseFloat($('#guess_input').val());  //  Parse a float number out of the guessed input
-                console.log('the_guess (parsed) : ',the_guess);
+                //console.log('the_guess (parsed) : ',the_guess);
 
                 var response = $('#response_div');  //  Save the response div selector
                 response.text("");  //  Clear the response div
 
                 //  Begin the_guess to the_number comparisons
-                console.log('isNaN(the_guess) : ', isNaN(parseInt(the_guess)));
+                //console.log('isNaN(the_guess) : ', isNaN(parseInt(the_guess)));
                 if (isNaN(the_guess)) {  //  Test for non-numbers
                     response.text(response.text() + "What the? This is not a number? I can't even...? ");
                 } else {
                     var difference = the_guess - the_number;  //  Save the difference between the_guess and the_number
-                    console.log('difference : ', difference);
+                    //console.log('difference : ', difference);
 
-                    console.log("difference == 0 : ", difference == 0);
+                    //console.log("difference == 0 : ", difference == 0);
                     if (difference == 0) {  //  Check to see if the guess is correct
                         response.text(response.text() + "You guessed right! Congratulations!");
                     } else {  //  If the guess is wrong...
-                        console.log('the_guess % 1 != 0 : ', the_guess % 1 != 0);
+                        //console.log('the_guess % 1 != 0 : ', the_guess % 1 != 0);
                         if (the_guess % 1 != 0) {  //  Check if the guess is actually an integer
                             response.text(response.text() + "Integer. Pick an integer. You do know what that is, don't you? ");
                         }
-                        console.log('the_guess < lower_limit || the_guess > upper_limit : ', the_guess < lower_limit || the_guess > upper_limit);
+                        //console.log('the_guess < lower_limit || the_guess > upper_limit : ', the_guess < lower_limit || the_guess > upper_limit);
                         if (the_guess < lower_limit || the_guess > upper_limit) {  //  Check if the guess is in range
                             response.text(response.text() + "In case you forgot how numbers work, " + the_guess + " is not between " + lower_limit + " and " + upper_limit + ". If you haven't noticed...");
                         }
-                        console.log('difference < 0 : ', difference < 0);
-                        console.log('difference > 0 : ', difference > 0);
+                        //console.log('difference < 0 : ', difference < 0);
+                        //console.log('difference > 0 : ', difference > 0);
                         if (difference < 0) {  //  Check if the guess was too low
                             response.text(response.text() + "You guessed too low.  Try again!");
                         } else if (difference > 0) {  //  Check if the guess was too high
