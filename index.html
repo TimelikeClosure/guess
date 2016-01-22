@@ -13,13 +13,33 @@
 
         <!--  Begin guessing game script  -->
         <script>
+
             //  Declare and initialize target number
             var the_number = null;
-            //  Declare and define lower and upper limits for guessing game
-            var lower_limit = 1, upper_limit = 10;
+
+            //  Declare and define initial lower and upper limits for guessing game
+            var lower_limit, upper_limit;
 
             //  Begin pick_number() function definition
             function pick_number() {
+
+                //  If limit fields are set, set new limits
+                var limits = [parseInt($('#set_lower_input').val()), parseInt($('#set_upper_input').val())];
+                //console.log("limits : ", limits)
+                if (!(isNaN(limits[0]))) {
+                    lower_limit = limits[0];
+                }
+                if (!(isNaN(limits[1]))) {
+                    upper_limit = limits[1];
+                }
+                //  Reset the instructions
+                $('#instructions').text('The current range is from ' + lower_limit + ' to ' + upper_limit);
+                $('#response_div').text('Click the "Guess!" button above');
+
+                //  Disable reset button, enable submit button
+                $('#submit_button').prop("disabled", false);
+                $('#reset_button').prop("disabled", true);
+
                 //  Generate a random integer from lower_limit to upper_limit
                 var random_number = Math.floor((upper_limit - lower_limit + 1)*Math.random() + lower_limit,1);
                 //console.log("random_number : " + random_number);
@@ -27,34 +47,40 @@
             }
             //  Close pick_number() function definition
 
-            //  Begin fill_instructions() function definition
-            function fill_instructions() {
-                $('#instructions').text('The current range is from ' + lower_limit + ' to ' + upper_limit);
-            }
-            //  Close fill_instructions() function definition
-
             //  Begin make_guess() function definition
             function make_guess() {
-                var the_guess = parseFloat($('#guess_input').val());  //  Parse a float number out of the guessed input
+
+                //  Parse a float number out of the guessed input
+                var the_guess = parseFloat($('#guess_input').val());
                 //console.log('the_guess (parsed) : ',the_guess);
 
-                var response = $('#response_div');  //  Save the response div selector
-                response.text("");  //  Clear the response div
+                //  Disable reset button
+                $('#reset_button').prop("disabled", false);
+
+                //  Save the response div selector and clear the text
+                var response = $('#response_div');
+                response.text("");
 
                 //  Begin the_guess to the_number comparisons
-                //console.log('isNaN(the_guess) : ', isNaN(parseInt(the_guess)));
+                //console.log('isNaN(the_guess) : ', isNaN(the_guess));
                 if (isNaN(the_guess)) {  //  Test for non-numbers
                     response.text(response.text() + "What the? This is not a number? I can't even...? ");
                 } else {
-                    var difference = the_guess - the_number;  //  Save the difference between the_guess and the_number
+
+                    //  Save the difference between the_guess and the_number
+                    var difference = the_guess - the_number;
                     //console.log('difference : ', difference);
 
                     //console.log("difference == 0 : ", difference == 0);
                     if (difference == 0) {  //  Check to see if the guess is correct
+
                         response.text(response.text() + "You guessed right! Congratulations!");
+                        $('#submit_button').prop("disabled", true);  //  Disable the submit button
+
                     } else {  //  If the guess is wrong...
                         //console.log('the_guess % 1 != 0 : ', the_guess % 1 != 0);
                         if (the_guess % 1 != 0) {  //  Check if the guess is actually an integer
+
                             response.text(response.text() + "Integer. Pick an integer. You do know what that is, don't you? ");
                         }
                         //console.log('the_guess < lower_limit || the_guess > upper_limit : ', the_guess < lower_limit || the_guess > upper_limit);
@@ -83,6 +109,14 @@
                 $('#submit_button').click(function(){
                     make_guess();
                 });
+                //  Call pick_number() on submit
+                $('#reset_button').click(function(){
+                    the_number = pick_number();
+                });
+                //  Enable reset button on changes
+                $('#set_lower_input,#set_upper_input').change(function(){
+                    $('#reset_button').prop("disabled", false);
+                });
             });
             //  Close jQuery event handlers on document ready
 
@@ -91,9 +125,15 @@
 
     </head>
 
-    <body onload="the_number = pick_number(); fill_instructions();">
+    <body onload="the_number = pick_number();">
         <h1>Guess!</h1>
         <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
+        <fieldset>
+            <legend>Settings</legend>
+            <label>Lower Limit : <input type="text" id="set_lower_input" value="1" /></label>
+            <label>Upper Limit : <input type="text" id="set_upper_input" value="10" /></label>
+            <button type="button" id="reset_button">Reset game</button>
+        </fieldset>
         <fieldset>
             <legend id="instructions">The current range is undetermined</legend>
             <label>Guess a number : <input type="text" id="guess_input" /></label>
@@ -101,8 +141,9 @@
         </fieldset>
         <fieldset>
             <legend>Results:</legend>
-            <div id="response_div"></div>
+            <div id="response_div">Click the "Guess!" button above</div>
         </fieldset>
+
     </body>
 
 </html>
