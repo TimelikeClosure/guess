@@ -11,7 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-        <!--  Begin guessing game initialization script  -->
+        <!--  Begin guessing game script  -->
         <script>
             //  Declare and initialize target number
             var the_number = null;
@@ -26,6 +26,12 @@
                 return random_number;
             }
             //  Close pick_number() function definition
+
+            //  Begin fill_instructions() function definition
+            function fill_instructions() {
+                $('#instructions').text('The current range is from ' + lower_limit + ' to ' + upper_limit);
+            }
+            //  Close fill_instructions() function definition
 
             //  Begin make_guess() function definition
             function make_guess() {
@@ -62,7 +68,7 @@
                         } else if (difference > 0) {  //  Check if the guess was too high
                             response.text(response.text() + "You guessed too high.  Try again!");
                         } else {  //  Catch-all in case I did this wrong
-                            response.text(response.text() + "Well I don't know what happened...maybe the fish fell off the treadmill again...");
+                            response.text(response.text() + "Well I don't know what happened...maybe the fish fell off the treadmill again?");
                         }
 
                     }
@@ -72,14 +78,18 @@
             //  Close make_guess() function definition
 
         </script>
-        <!--  Close guessing game initialization script  -->
+        <!--  Close guessing game script  -->
 
     </head>
 
-    <body onload="the_number = pick_number();">
-        <input type="text" id="guess_input" />
-        <div id="response_div"></div>
-        <button type="button" id="submit_button" onclick="make_guess();">Submit</button>
+    <body onload="the_number = pick_number(); fill_instructions();">
+        <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
+        <fieldset>
+            <legend id="instructions">Guess a number</legend>
+            <label>Guess a number : <input type="text" id="guess_input" /></label>
+            <button type="button" id="submit_button" onclick="make_guess();">Guess</button>
+            <div id="response_div"></div>
+        </fieldset>
     </body>
 
 </html>
