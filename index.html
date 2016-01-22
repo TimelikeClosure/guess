@@ -32,8 +32,10 @@
                 if (!(isNaN(limits[1]))) {
                     upper_limit = limits[1];
                 }
-                //  Reset the instructions
                 $('#instructions').text('The current range is from ' + lower_limit + ' to ' + upper_limit);
+
+                //  Reset the results
+                $('#settings_div').text("Game reset!");
                 $('#response_div').text('Click the "Guess!" button above');
 
                 //  Disable reset button, enable submit button
@@ -56,6 +58,7 @@
 
                 //  Disable reset button
                 $('#reset_button').prop("disabled", false);
+                $('#settings_div').text("");
 
                 //  Save the response div selector and clear the text
                 var response = $('#response_div');
@@ -115,7 +118,13 @@
                 });
                 //  Enable reset button on changes
                 $('#set_lower_input,#set_upper_input').change(function(){
-                    $('#reset_button').prop("disabled", false);
+                    if ($('#set_upper_input').val() - $('#set_lower_input').val() >= 1) {
+                        $('#reset_button').prop("disabled", false);
+                        $('#settings_div').text("Press reset to apply changes.");
+                    } else {
+                        $('#reset_button').prop("disabled",true);
+                        $('#settings_div').text("Please set upper limit to at least one greater than lower limit!");
+                    }
                 });
             });
             //  Close jQuery event handlers on document ready
@@ -133,6 +142,7 @@
             <label>Lower Limit : <input type="text" id="set_lower_input" value="1" /></label>
             <label>Upper Limit : <input type="text" id="set_upper_input" value="10" /></label>
             <button type="button" id="reset_button">Reset game</button>
+            <div id="settings_div"></div>
         </fieldset>
         <fieldset>
             <legend id="instructions">The current range is undetermined</legend>
