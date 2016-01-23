@@ -18,25 +18,42 @@
     </head>
 
     <body onload="the_number = pick_number();">
-        <h1>Guess!</h1>
-        <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
-        <fieldset>
-            <legend>Settings</legend>
-            <label>Lower Limit : <input type="text" id="set_lower_input" value="1" /></label>
-            <label>Upper Limit : <input type="text" id="set_upper_input" value="10" /></label>
-            <button type="button" id="reset_button">Reset game</button>
-            <div id="settings_div"></div>
-        </fieldset>
-        <fieldset>
-            <legend id="instructions">The current range is undetermined</legend>
-            <label>Guess a number : <input type="text" id="guess_input" /></label>
-            <button type="button" id="submit_button">Guess!</button>
-        </fieldset>
-        <fieldset>
-            <legend>Results:</legend>
-            <div id="response_div">Click the "Guess!" button above</div>
-        </fieldset>
-
+        <form class="container form-horizontal">
+            <h1>Guess!</h1>
+            <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
+            <p id="#script-warning">Warning: this game requires scripts in order to run. Please enable scripts to continue.</p>
+            <fieldset class="form-horizontal row">
+                <legend>Game Settings</legend>
+                <label class="control-label col-sm-2" for="difficulty-val">Difficulty : </label>
+                <select id="difficulty-val" name="difficulty-val" class="form-control col-sm-4">
+                    <option value="easy">Diff-i-cult?</option>
+                    <option value="medium" selected>Difficult.</option>
+                    <option value="hard">Difficult!</option>
+                    <option value="very-hard">DIFFICULT!!1!</option>
+                </select>
+                <div id="difficulty-desc"></div>
+                <label class="control-label">Lower Limit : <input type="text" id="set_lower_input" class="game-parameter form-control" value="1" disabled/></label>
+                <label class="control-label">Upper Limit : <input type="text" id="set_upper_input" class="game-parameter form-control" value="100" /></label>
+                <div>Total number of guesses : <span>6</span></div>
+                <button type="button" id="reset_button" class="btn">Reset game</button>
+                <div id="settings_div"></div>
+            </fieldset>
+            <fieldset>
+                <legend id="instructions">The current range is undetermined</legend>
+                <div class="row">
+                    <div class="col-sm-6">Guesses used : <span></span></div>
+                    <div class="col-sm-6">Guesses remaining : <span></span></div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-8 control-label">Guess a number : <input type="text" id="guess_input" class="form-control"/></label>
+                    <button type="button" id="submit_button" class="btn col-sm-4">Guess!</button>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Guess Log:</legend>
+                <div id="response_div">Click the "Guess!" button above</div>
+            </fieldset>
+        </form>
     </body>
 
 </html>

@@ -87,6 +87,7 @@ function make_guess() {
 
 //  Begin jQuery event handlers on document ready
 $(document).ready(function(){
+
     //  Call make_guess() on submit
     $('#submit_button').click(function(){
         make_guess();
