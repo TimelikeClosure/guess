@@ -21,8 +21,8 @@
         <form class="container form-horizontal">
             <h1>Guess!</h1>
             <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
-            <p id="#script-warning">Warning: this game requires scripts in order to run. Please enable scripts to continue.</p>
-            <fieldset class="form-horizontal row">
+            <noscript><div class="alert alert-danger" role="alert"><strong>Warning!</strong> This game requires scripts to run. Please <a href="http://www.enable-javascript.com/" class="alert-link">enable javascript</a> to continue.</div></noscript>
+            <fieldset class="form row">
                 <legend>Game Settings</legend>
                 <label class="control-label col-sm-2" for="difficulty-val">Difficulty : </label>
                 <select id="difficulty-val" name="difficulty-val" class="form-control col-sm-4">
