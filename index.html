@@ -19,11 +19,14 @@
 
     <body onload="the_number = pick_number();">
         <form class="container form-horizontal">
-            <h1>Guess!</h1>
-            <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
-            <noscript><div class="alert alert-danger" role="alert"><strong>Warning!</strong> This game requires scripts to run. Please <a href="http://www.enable-javascript.com/" class="alert-link">enable javascript</a> to continue.</div></noscript>
-            <fieldset class="form row">
+            <header class="jumbotron">
+                <h1>Guess!</h1>
+                <p>The object of this game is to guess a randomly generated integer, using the form below. The number will not change between guesses. Good luck!</p>
+                <noscript><div class="alert alert-danger" role="alert"><strong>Warning!</strong> This game requires scripts to run. Please <a href="http://www.enable-javascript.com/" class="alert-link">enable javascript</a> to continue.</div></noscript>
+            </header>
+            <fieldset class="form-group">
                 <legend>Game Settings</legend>
+                <!--  Game difficulty functionality not yet added
                 <label class="control-label col-sm-2" for="difficulty-val">Difficulty : </label>
                 <select id="difficulty-val" name="difficulty-val" class="form-control col-sm-4">
                     <option value="easy">Diff-i-cult?</option>
@@ -32,26 +35,41 @@
                     <option value="very-hard">DIFFICULT!!1!</option>
                 </select>
                 <div id="difficulty-desc"></div>
-                <label class="control-label">Lower Limit : <input type="text" id="set_lower_input" class="game-parameter form-control" value="1" disabled/></label>
-                <label class="control-label">Upper Limit : <input type="text" id="set_upper_input" class="game-parameter form-control" value="100" /></label>
+                -->
+                <label class="control-label col-md-2" for="set_lower_input">Lower Limit : </label>
+                <div class="col-md-2">
+                    <input type="text" id="set_lower_input" class="game-parameter form-control" value="1" disabled/>
+                </div>
+                <label class="control-label col-md-2" for="set_upper_input">Upper Limit : </label>
+                <div class="col-md-2">
+                    <input type="text" id="set_upper_input" class="game-parameter form-control col-md-4" value="100" />
+                </div>
+                <!--  Guess counter difficulty not yet added
                 <div>Total number of guesses : <span>6</span></div>
-                <button type="button" id="reset_button" class="btn">Reset game</button>
-                <div id="settings_div"></div>
+                -->
+                <label class="control-label sr-only" for="reset_button">Reset game : </label>
+                <div class="col-md-4">
+                    <button type="button" id="reset_button" class="form-control">Reset game</button>
+                </div>
+                <div id="settings_div" class="col-md-12 well"></div>
             </fieldset>
-            <fieldset>
+            <fieldset class="form-group">
                 <legend id="instructions">The current range is undetermined</legend>
+                <!--  Guess counter difficulty not yet added
                 <div class="row">
                     <div class="col-sm-6">Guesses used : <span></span></div>
                     <div class="col-sm-6">Guesses remaining : <span></span></div>
                 </div>
-                <div class="row">
-                    <label class="col-sm-8 control-label">Guess a number : <input type="text" id="guess_input" class="form-control"/></label>
-                    <button type="button" id="submit_button" class="btn col-sm-4">Guess!</button>
+                -->
+                <label class="col-md-2 control-label" for="guess_input">Guess a number : </label>
+                <div class="col-md-2">
+                    <input type="text" id="guess_input" class="form-control"/>
                 </div>
+                <button type="button" id="submit_button" class="btn col-md-4">Guess!</button>
             </fieldset>
-            <fieldset>
+            <fieldset class="form-group">
                 <legend>Guess Log:</legend>
-                <div id="response_div">Click the "Guess!" button above</div>
+                <div id="response_div" class="well col-md-12"><p>Click the "Guess!" button above</p></div>
             </fieldset>
         </form>
     </body>

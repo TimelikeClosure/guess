@@ -48,11 +48,18 @@ function make_guess() {
 
     //  Save the response div selector and clear the text
     var response = $('#response_div');
-    response.text("");
+
+    //  Create a guess hint object to be added to response
+    var guess_hint = $('<ul>', {text: 'Your guess was : '});
+    guess_hint.text(guess_hint.text() + $('#guess_input').val());
+    guess_hint.html('<h4>' + guess_hint.text() + '</h4>');
+
+    //  Clear the guess input
+    $('#guess_input').val('');
 
     //  Begin the_guess to the_number comparisons
     if (isNaN(the_guess)) {  //  Test for non-numbers
-        response.text(response.text() + "What the? This is not a number? I can't even...? ");
+        guess_hint.append($('<li>', {text: "What the? This is not a number? I can't even...? "}));
     } else {
 
         //  Save the difference between the_guess and the_number
@@ -60,21 +67,23 @@ function make_guess() {
 
         if (difference == 0) {  //  Check to see if the guess is correct
 
-            response.text(response.text() + "You guessed right! Congratulations!");
+            guess_hint.append($('<li>', {text: "You guessed right! Congratulations!"}));
             $('#submit_button').prop("disabled", true);  //  Disable the submit button
 
         } else {  //  If the guess is wrong...
             if (the_guess % 1 != 0) {  //  Check if the guess is actually an integer
 
-                response.text(response.text() + "Integer. Pick an integer. You do know what that is, don't you? ");
+                guess_hint.append($('<li>', {text: "Integer. Pick an integer. You do know what that is, don't you?"}));
             }
             if (the_guess < lower_limit || the_guess > upper_limit) {  //  Check if the guess is in range
-                response.text(response.text() + "In case you forgot how numbers work, " + the_guess + " is not between " + lower_limit + " and " + upper_limit + ". If you haven't noticed...");
+
+                guess_hint.append($('<li>', {text: "In case you forgot how numbers work, " + the_guess + " is not between " + lower_limit + " and " + upper_limit + ". If you haven't noticed..."}));
             }
             if (difference < 0) {  //  Check if the guess was too low
-                response.text(response.text() + "You guessed too low.  Try again!");
+
+                guess_hint.append($('<li>', {text: "You guessed too low.  Try again!"}));
             } else if (difference > 0) {  //  Check if the guess was too high
-                response.text(response.text() + "You guessed too high.  Try again!");
+                guess_hint.append($('<li>', {text: "You guessed too high.  Try again!"}));
             } else {  //  Catch-all in case I did this wrong
                 response.text(response.text() + "Well I don't know what happened...maybe the fish fell off the treadmill again?");
             }
@@ -82,6 +91,8 @@ function make_guess() {
         }
     }
     //  Close the_guess to the_number comparisons
+
+    response.prepend(guess_hint);
 }
 //  Close make_guess() function definition
 
