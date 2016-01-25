@@ -22,7 +22,7 @@ function pick_number() {
 
     //  Reset the results
     $('#settings_div').text("Game reset!");
-    $('#response_div').text('Enter a number to guess above and click the "Guess!" button to start.');
+    $('#response_div').html('<ul><h4>Enter a number to guess above and click the "Guess!" button to start.</h4></ul>');
 
     //  Disable reset button, enable submit button
     $('#submit_button').prop("disabled", false);
@@ -77,7 +77,7 @@ function make_guess() {
             }
             if (the_guess < lower_limit || the_guess > upper_limit) {  //  Check if the guess is in range
 
-                guess_hint.append($('<li>', {text: "In case you forgot how numbers work, " + the_guess + " is not between " + lower_limit + " and " + upper_limit + ". If you haven't noticed..."}));
+                guess_hint.append($('<li>', {text: "In case you forgot how numbers work, " + the_guess + " is not between " + lower_limit + " and " + upper_limit + ". I think it goes without saying..."}));
             }
             if (difference < 0) {  //  Check if the guess was too low
 
