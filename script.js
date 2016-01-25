@@ -22,7 +22,7 @@ function pick_number() {
 
     //  Reset the results
     $('#settings_div').text("Game reset!");
-    $('#response_div').text('Click the "Guess!" button above');
+    $('#response_div').text('Enter a number to guess above and click the "Guess!" button to start.');
 
     //  Disable reset button, enable submit button
     $('#submit_button').prop("disabled", false);
